@@ -70,13 +70,25 @@ const qualifications = [
   },
 ];
 
+const competitions = [
+  {
+    title: "Hackfusion 3",
+    type: "National Level Hackathon",
+    text: "Participated in a national-level competitive tech environment focused on building, problem solving, and teamwork.",
+  },
+  {
+    title: "TechFiesta'26",
+    type: "National Level Hackathon",
+    text: "Participated in a national-level hackathon to explore ideas, collaboration, and practical learning.",
+  },
+];
+
 const projects = [
   {
     type: "AI Project",
     title: "Agentic AI Pharmacy System",
     text: "A pharmacy-focused AI project exploring smarter workflows, automation, and practical agentic system ideas.",
     tech: "Agentic AI / Pharmacy",
-    screen: "screen-one",
     link: "https://github.com/Rit123-hub/agentic-ai.pharmacy",
   },
   {
@@ -84,7 +96,6 @@ const projects = [
     title: "Ultimate Contact Manager",
     text: "A contact management project built around organizing people, details, and user-friendly data workflows.",
     tech: "Contact Manager",
-    screen: "screen-two",
     link: "https://github.com/adityakandle0310/ContactManger",
   },
   {
@@ -92,7 +103,6 @@ const projects = [
     title: "SQL Practice Work",
     text: "A collection of SQL basics: queries, tables, filters, and database learning exercises.",
     tech: "SQL Basics",
-    screen: "screen-three",
     link: "#",
   },
 ];
@@ -193,11 +203,21 @@ function Hero() {
         )
       )
     ),
-    h("div", { className: "hero-showcase reveal" },
-      h("img", { src: "assets/hero-workspace.png", alt: "Modern developer workspace with laptop" }),
-      h("div", { className: "showcase-caption" },
-        h("span", null, "Open to Opportunities"),
-        h("strong", null, "Frontend + Programming + AI Projects")
+    h("div", { className: "hero-console reveal", "aria-label": "Developer profile summary" },
+      h("div", { className: "console-top" },
+        h("span"),
+        h("span"),
+        h("span")
+      ),
+      h("div", { className: "console-body" },
+        h("p", null, h("span", null, "name:"), " Aditya Kandle"),
+        h("p", null, h("span", null, "focus:"), " React, Next.js, Java, Python, SQL"),
+        h("p", null, h("span", null, "projects:"), " AI Pharmacy System, Contact Manager"),
+        h("p", null, h("span", null, "status:"), " Open to internships and collaborations")
+      ),
+      h("div", { className: "console-card" },
+        h("strong", null, "Open to Opportunities"),
+        h("p", null, "Frontend + Programming + AI Projects")
       )
     )
   );
@@ -277,6 +297,26 @@ function Qualifications() {
   );
 }
 
+// Competitions component: technical events and hackathons.
+function Competitions() {
+  return h("section", { className: "section competitions", id: "competitions" },
+    h("div", { className: "section-heading reveal" },
+      h("p", { className: "eyebrow" }, "Competitions"),
+      h("h2", null, "National-level hackathons that strengthened my practical learning.")
+    ),
+    h("div", { className: "competition-grid" },
+      competitions.map((item, index) =>
+        h("article", { className: "competition-card reveal", key: item.title },
+          h("span", { className: "competition-index" }, String(index + 1).padStart(2, "0")),
+          h("p", { className: "competition-type" }, item.type),
+          h("h3", null, item.title),
+          h("p", null, item.text)
+        )
+      )
+    )
+  );
+}
+
 // Skills component: clear stack summary with React, Next.js, Java, Python, and SQL.
 function Skills() {
   return h("section", { className: "section skills", id: "skills" },
@@ -316,11 +356,11 @@ function Projects() {
     h("div", { className: "project-grid" },
       projects.map((project, index) =>
         h("article", { className: "project-card reveal", key: project.title },
-          h("div", { className: `project-screen ${project.screen}` },
-            h("span", null, String(index + 1).padStart(2, "0"))
-          ),
           h("div", { className: "project-content" },
-            h("p", { className: "project-type" }, project.type),
+            h("div", { className: "project-heading" },
+              h("span", { className: "project-number" }, String(index + 1).padStart(2, "0")),
+              h("p", { className: "project-type" }, project.type)
+            ),
             h("h3", null, project.title),
             h("p", null, project.text),
             h("div", { className: "project-footer" },
@@ -390,6 +430,7 @@ function App() {
       h(StatsBand),
       h(About),
       h(Qualifications),
+      h(Competitions),
       h(Skills),
       h(Projects),
       h(Contact)
